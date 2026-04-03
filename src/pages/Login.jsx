@@ -23,8 +23,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("https://student.nikeeworld.online
-/login", {
+      const res = await axios.post("https://student.nikeeworld.online/login", {
         email,
         password,
       });

@@ -12,8 +12,7 @@ const CourseDetails = () => {
   // ================= FETCH COURSES =================
   const fetchCourses = async () => {
     try {
-      const res = await axios.get("https://student.nikeeworld.online
-/api/courses");
+      const res = await axios.get("https://student.nikeeworld.online/api/courses");
       setCourses(res.data);
     } catch (err) {
       console.error("Error fetching courses:", err);
@@ -29,10 +28,7 @@ const CourseDetails = () => {
     if (!window.confirm("Delete this course?")) return;
 
     try {
-      await axios.delete(
-        `https://student.nikeeworld.online
-/api/courses/${row.id}`
-      );
+      await axios.delete(`https://student.nikeeworld.online/api/courses/${row.id}`);
       fetchCourses();
     } catch (err) {
       console.error("Delete error:", err);
@@ -47,11 +43,7 @@ const CourseDetails = () => {
   // ================= UPDATE COURSE =================
   const handleUpdate = async () => {
     try {
-      await axios.put(
-        `https://student.nikeeworld.online
-/api/courses/${editData.id}`,
-        editData
-      );
+      await axios.put(`https://student.nikeeworld.online/api/courses/${editData.id}`, editData);
 
       alert("Updated successfully");
       setEditData(null);

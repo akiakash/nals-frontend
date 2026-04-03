@@ -9,8 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const API = "https://student.nikeeworld.online
-/api/enrolments";
+const API = "https://student.nikeeworld.online/api/enrolments";
 
 const StudentEnrolment = () => {
   const [data, setData] = useState([]);
@@ -182,8 +181,7 @@ const StudentEnrolment = () => {
         return row.forms.map((f, i) => (
           <div key={i}>
             <a
-              href={`https://student.nikeeworld.online
-/uploads/${f.file}`}
+              href={`https://student.nikeeworld.online/uploads/${f.file}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -191,8 +189,7 @@ const StudentEnrolment = () => {
             </a>
 
             <a
-              href={`https://student.nikeeworld.online
-/uploads/${f.file}`}
+              href={`https://student.nikeeworld.online/uploads/${f.file}`}
               download
               style={{ marginLeft: "10px", color: "green" }}
             >

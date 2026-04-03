@@ -66,8 +66,7 @@ const AddCollege = () => {
 
     try {
       // Save college row first
-      const res = await axios.post("https://student.nikeeworld.online
-/addcollege", formData);
+      const res = await axios.post("https://student.nikeeworld.online/addcollege", formData);
       const collegeId = res.data.insertId;
 
       if (formData.hasAgreement === "Yes") {
