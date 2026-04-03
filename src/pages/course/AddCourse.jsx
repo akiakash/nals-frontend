@@ -74,7 +74,8 @@ const AddCourse = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5050/api/courses", formattedData);
+      const response = await axios.post("https://student.nikeeworld.online
+/api/courses", formattedData);
       alert(response.data.message);
       handleCancel(); // reset form
       setErrors({});

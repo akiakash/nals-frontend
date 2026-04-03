@@ -23,7 +23,8 @@ const SignUp = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5050/signup", formData);
+      const res = await axios.post("https://student.nikeeworld.online
+/signup", formData);
       if (res.data.success) {
         setSuccess(res.data.message);
         setFormData({ firstname: "", lastname: "", email: "", password: "" });

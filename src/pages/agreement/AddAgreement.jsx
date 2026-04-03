@@ -86,7 +86,8 @@ const AddAgreement = () => {
     if (formData.agreementFile) data.append("agreementFile", formData.agreementFile);
 
     try {
-      await axios.post("http://localhost:5050/addagreement", data, {
+      await axios.post("https://student.nikeeworld.online
+/addagreement", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Agreement saved successfully!");

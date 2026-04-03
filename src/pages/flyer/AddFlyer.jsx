@@ -18,7 +18,8 @@ const AddFlyer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/api/colleges_agreements")
+      .get("https://student.nikeeworld.online
+/api/colleges_agreements")
       .then((res) => setColleges(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -100,7 +101,8 @@ const AddFlyer = () => {
       });
 
       const res = await axios.post(
-        "http://localhost:5050/api/upload_flyers",
+        "https://student.nikeeworld.online
+/api/upload_flyers",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },

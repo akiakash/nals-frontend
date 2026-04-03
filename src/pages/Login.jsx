@@ -23,7 +23,8 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5050/login", {
+      const res = await axios.post("https://student.nikeeworld.online
+/login", {
         email,
         password,
       });

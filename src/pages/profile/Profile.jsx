@@ -18,7 +18,8 @@ import {
   faTimes
 } from "@fortawesome/free-solid-svg-icons";
 
-const API_URL = "http://localhost:5050/api/profile";
+const API_URL = "https://student.nikeeworld.online
+/api/profile";
 
 const allowedDepartments = [
   "IT", "HR", "Finance", "Marketing", "Sales",

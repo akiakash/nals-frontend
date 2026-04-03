@@ -14,7 +14,8 @@ const FlyersDetails = () => {
 
   const fetchFlyers = async () => {
     try {
-      const res = await axios.get("http://localhost:5050/api/flyers");
+      const res = await axios.get("https://student.nikeeworld.online
+/api/flyers");
       setFlyers(Array.isArray(res.data) ? res.data : res.data.data || []);
     } catch (err) {
       console.error(err);
@@ -43,7 +44,8 @@ const FlyersDetails = () => {
       }
 
       await axios.put(
-        `http://localhost:5050/api/flyers/${editData.id}`,
+        `https://student.nikeeworld.online
+/api/flyers/${editData.id}`,
         formData
       );
 
@@ -60,7 +62,8 @@ const FlyersDetails = () => {
     if (!window.confirm(`Delete ${row.filePath}?`)) return;
 
     try {
-      await axios.delete(`http://localhost:5050/api/flyers/${row.id}`);
+      await axios.delete(`https://student.nikeeworld.online
+/api/flyers/${row.id}`);
       fetchFlyers();
     } catch (err) {
       console.error(err);
@@ -75,7 +78,8 @@ const FlyersDetails = () => {
       render: (row) => (
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <a
-            href={`http://localhost:5050/uploads/${row.filePath}`}
+            href={`https://student.nikeeworld.online
+/uploads/${row.filePath}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -83,7 +87,8 @@ const FlyersDetails = () => {
           </a>
 
           <a
-            href={`http://localhost:5050/uploads/${row.filePath}`}
+            href={`https://student.nikeeworld.online
+/uploads/${row.filePath}`}
             download
             style={{ color: "green" }}
           >
@@ -143,7 +148,8 @@ const FlyersDetails = () => {
                 }}
               >
                 <a
-                  href={`http://localhost:5050/uploads/${editData.filePath}`}
+                  href={`https://student.nikeeworld.online
+/uploads/${editData.filePath}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

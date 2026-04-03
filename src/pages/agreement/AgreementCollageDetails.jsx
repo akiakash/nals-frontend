@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faDownload } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const API = "http://localhost:5050/colleges";
+const API = "https://student.nikeeworld.online
+/colleges";
 
 const AgreementCollage = () => {
   const [data, setData] = useState([]);
@@ -89,7 +90,8 @@ const AgreementCollage = () => {
           ? row.filePath.substring(row.filePath.indexOf("_") + 1)
           : row.filePath;
 
-        const fileUrl = `http://localhost:5050/uploads/${row.filePath}`;
+        const fileUrl = `https://student.nikeeworld.online
+/uploads/${row.filePath}`;
 
         return (
           <div style={{ display: "flex", gap: "10px" }}>
