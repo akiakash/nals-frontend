@@ -9,15 +9,15 @@ import Flyer2 from "../assets/img/flyer/flyer2.jpeg";
 import Flyer3 from "../assets/img/flyer/flyer3.jpeg";
 import Flyer4 from "../assets/img/flyer/flyer4.jpeg";
 import Flyer5 from "../assets/img/flyer/flyer5.jpeg";
-import Flyer6 from "../assets/img/flyer/flyer6.jpeg";
-import Flyer7 from "../assets/img/flyer/flyer7.jpeg";
-import Flyer8 from "../assets/img/flyer/flyer8.jpeg";
-import Flyer9 from "../assets/img/flyer/flyer9.jpeg";
-import Flyer10 from "../assets/img/flyer/flyer10.jpeg";
-import Flyer11 from "../assets/img/flyer/flyer11.jpeg";
-import Flyer12 from "../assets/img/flyer/flyer12.jpeg";
-import Flyer13 from "../assets/img/flyer/flyer13.jpeg";
-import Flyer14 from "../assets/img/flyer/flyer14.jpeg";
+import Flyer6 from "../assets/img/flyer/Flyer6.jpeg";
+import Flyer7 from "../assets/img/flyer/Flyer7.jpeg";
+import Flyer8 from "../assets/img/flyer/Flyer8.jpeg";
+import Flyer9 from "../assets/img/flyer/Flyer9.jpeg";
+import Flyer10 from "../assets/img/flyer/Flyer10.jpeg";
+import Flyer11 from "../assets/img/flyer/Flyer11.jpeg";
+import Flyer12 from "../assets/img/flyer/Flyer12.jpeg";
+import Flyer13 from "../assets/img/flyer/Flyer13.jpeg";
+import Flyer14 from "../assets/img/flyer/Flyer14.jpeg";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
