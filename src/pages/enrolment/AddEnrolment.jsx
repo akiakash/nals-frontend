@@ -6,6 +6,7 @@ import axios from "axios";
 
 import FormActions from "../../components/FormActions";
 import "../../assets/styles/style.css";
+import { API_BASE } from "../../config/api";
 
 const AddEnrolment = () => {
   const fileRefs = useRef([]);
@@ -25,7 +26,7 @@ const AddEnrolment = () => {
   // Fetch colleges
   useEffect(() => {
     axios
-      .get("https://student.nikeeworld.online/api/colleges_agreements")
+      .get(`${API_BASE}/api/colleges_agreements`)
       .then((res) => setColleges(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -101,13 +102,9 @@ const handleSubmit = async () => {
     // ✅ DEBUG (IMPORTANT)
     console.log("FORM DATA 👉", [...data.entries()]);
 
-    const res = await axios.post(
-      "https://student.nikeeworld.online/api/enrolments",
-      data,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
+    const res = await axios.post(`${API_BASE}/api/enrolments`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
     alert(res.data.message);
     handleCancel();

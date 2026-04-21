@@ -20,6 +20,7 @@ import FlyersDetails from "./pages/flyer/FlyersDetails";
 
 import Profile from "./pages/profile/Profile";
 import ChatPage from "./pages/chat/ChatPage";
+import Reports from "./pages/Reports";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -73,6 +74,8 @@ const App = () => {
         <Route path="flyer" element={<FlyersDetails />} />
         <Route path="profile" element={<Profile />} />
         <Route path="chat" element={<ChatPage />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="Reports" element={<Navigate to="/reports" replace />} />
 
       </Route>
 

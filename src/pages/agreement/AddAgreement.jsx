@@ -1,16 +1,27 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUpload } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import FormActions from "../../components/FormActions";
 import "../../assets/styles/style.css";
+import { API_BASE } from "../../config/api";
 
 const AddAgreement = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const collegeId = location.state?.collegeId;
+  const [searchParams] = useSearchParams();
+
+  const [colleges, setColleges] = useState([]);
+  const [collegesLoading, setCollegesLoading] = useState(false);
+  const [selectedCollegeId, setSelectedCollegeId] = useState(() => {
+    const fromState = location.state?.collegeId;
+    const fromQuery = searchParams.get("collegeId");
+    if (fromState != null && fromState !== "") return String(fromState);
+    if (fromQuery != null && fromQuery !== "") return String(fromQuery);
+    return "";
+  });
 
   const [formData, setFormData] = useState({
     agreementName: "",
@@ -26,11 +37,30 @@ const AddAgreement = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    if (!collegeId) {
-      alert("College data missing!");
-      navigate("/addcollege");
-    }
-  }, [collegeId, navigate]);
+    let cancelled = false;
+    const loadColleges = async () => {
+      setCollegesLoading(true);
+      try {
+        const res = await axios.get(`${API_BASE}/api/colleges_agreements`);
+        if (cancelled) return;
+        const rows = Array.isArray(res.data) ? res.data : [];
+        setColleges(rows);
+        setSelectedCollegeId((current) => {
+          if (current) return current;
+          if (rows.length === 1) return String(rows[0].id);
+          return "";
+        });
+      } catch (e) {
+        if (!cancelled) setColleges([]);
+      } finally {
+        if (!cancelled) setCollegesLoading(false);
+      }
+    };
+    loadColleges();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +87,7 @@ const AddAgreement = () => {
   // ✅ Validate form
   const validateForm = () => {
     const newErrors = {};
+    if (!selectedCollegeId) newErrors.collegeId = "Please select a college";
     if (!formData.agreementName.trim()) newErrors.agreementName = "Agreement Name is required";
     if (!formData.startDate) newErrors.startDate = "Start Date is required";
     if (!formData.expireDate) newErrors.expireDate = "Expire Date is required";
@@ -76,7 +107,7 @@ const AddAgreement = () => {
     if (Object.keys(validationErrors).length > 0) return;
 
     const data = new FormData();
-    data.append("collegeId", collegeId);
+    data.append("collegeId", selectedCollegeId);
     data.append("agreementName", formData.agreementName);
     data.append("startDate", formData.startDate);
     data.append("expireDate", formData.expireDate);
@@ -86,11 +117,11 @@ const AddAgreement = () => {
     if (formData.agreementFile) data.append("agreementFile", formData.agreementFile);
 
     try {
-      await axios.post("https://student.nikeeworld.online/addagreement", data, {
+      await axios.post(`${API_BASE}/addagreement`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Agreement saved successfully!");
-      navigate("/addcollege");
+      navigate("/addcollage");
     } catch (error) {
       console.error("Error saving agreement:", error);
       alert(error.response?.data?.error || "Network error: Could not reach backend");
@@ -120,6 +151,28 @@ const AddAgreement = () => {
         </p>
 
         <form className="form-content" onSubmit={handleSubmit}>
+          <div className="form-group full">
+            <label>College</label>
+            <select
+              value={selectedCollegeId}
+              onChange={(e) => setSelectedCollegeId(e.target.value)}
+              disabled={collegesLoading}
+            >
+              <option value="">{collegesLoading ? "Loading colleges…" : "Select college"}</option>
+              {colleges.map((c) => (
+                <option key={c.id} value={String(c.id)}>
+                  {c.tradingName || `College #${c.id}`}
+                </option>
+              ))}
+            </select>
+            {errors.collegeId && <span className="error">{errors.collegeId}</span>}
+            {!collegesLoading && colleges.length === 0 && (
+              <small className="error" style={{ display: "block", marginTop: 6 }}>
+                No colleges found. Add a college first, then return here.
+              </small>
+            )}
+          </div>
+
           <div className="form-group full">
             <label>Agreement Name</label>
             <input

@@ -6,6 +6,7 @@ import axios from "axios";
 
 import FormActions from "../../components/FormActions";
 import "../../assets/styles/style.css";
+import { API_BASE } from "../../config/api";
 
 const AddCollege = () => {
   const navigate = useNavigate();
@@ -66,12 +67,12 @@ const AddCollege = () => {
 
     try {
       // Save college row first
-      const res = await axios.post("https://student.nikeeworld.online/addcollege", formData);
+      const res = await axios.post(`${API_BASE}/addcollege`, formData);
       const collegeId = res.data.insertId;
 
       if (formData.hasAgreement === "Yes") {
         // Redirect to AddAgreement page with collegeId
-        navigate("/addagreement", { state: { collegeId } });
+        navigate("/addagreement", { state: { collegeId: String(collegeId) } });
       } else {
         alert("College saved successfully!");
         handleCancel();

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DataTable from "../../components/tables/DataTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faDownload } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { API_BASE } from "../../config/api";
 
-const API = "https://student.nikeeworld.online/colleges";
+const API = `${API_BASE}/colleges`;
 
 const AgreementCollage = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [editData, setEditData] = useState(null);
   const [file, setFile] = useState(null);
@@ -80,6 +83,20 @@ const AgreementCollage = () => {
     { key: "remark", label: "Remark" },
 
     {
+      key: "_agreement",
+      label: "Add agreement",
+      render: (row) => (
+        <button
+          type="button"
+          className="btn-update"
+          style={{ padding: "4px 10px", fontSize: 12 }}
+          onClick={() => navigate("/addagreement", { state: { collegeId: row.id } })}
+        >
+          PDF
+        </button>
+      ),
+    },
+    {
       key: "filePath",
       label: "Attachment",
       render: (row) => {
@@ -89,7 +106,7 @@ const AgreementCollage = () => {
           ? row.filePath.substring(row.filePath.indexOf("_") + 1)
           : row.filePath;
 
-        const fileUrl = `https://student.nikeeworld.online/uploads/${row.filePath}`;
+        const fileUrl = `${API_BASE}/uploads/${row.filePath}`;
 
         return (
           <div style={{ display: "flex", gap: "10px" }}>

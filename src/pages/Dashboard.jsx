@@ -73,10 +73,10 @@ const AdminDashboard = () => {
 
       {/* ===== QUICK ACTIONS ===== */}
       <div className="quick-actions">
-        <Link to="/AddAgreement" className="qa-btn">Create Agreement</Link>
-        <Link to="/AddCollage" className="qa-btn">Add Collage</Link>
-        <Link to="/AddCourse" className="qa-btn">Add Course</Link>
-        <Link to="/Reports" className="qa-btn">View Reports</Link>
+        <Link to="/addagreement" className="qa-btn">Create Agreement</Link>
+        <Link to="/addcollage" className="qa-btn">Add Collage</Link>
+        <Link to="/addcourse" className="qa-btn">Add Course</Link>
+        <Link to="/reports" className="qa-btn">View Reports</Link>
       </div>
 
       {/* ===== FLYERS ===== */}
