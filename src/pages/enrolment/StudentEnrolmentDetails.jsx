@@ -68,6 +68,11 @@ const StudentEnrolment = () => {
       setData(Object.values(grouped));
     } catch (err) {
       console.error("Fetch error:", err);
+      alert(
+        err.response?.data?.error ||
+          err.response?.data?.message ||
+          "Failed to load enrolments"
+      );
     }
   };
 
@@ -92,6 +97,11 @@ const StudentEnrolment = () => {
       fetchData();
     } catch (err) {
       console.error("Delete error:", err);
+      alert(
+        err.response?.data?.error ||
+          err.response?.data?.message ||
+          "Error deleting enrolment"
+      );
     }
   };
 
@@ -112,7 +122,7 @@ const StudentEnrolment = () => {
         }
       });
 
-      await Promise.all(
+      const responses = await Promise.all(
         editData.ids.map((id) =>
           axios.put(`${API}/${id}`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
@@ -120,10 +130,18 @@ const StudentEnrolment = () => {
         )
       );
 
+      const msg = responses[0]?.data?.message;
+      alert(msg || "Enrolment updated successfully.");
+
       setEditData(null);
       fetchData();
     } catch (err) {
       console.error("Update error:", err);
+      alert(
+        err.response?.data?.error ||
+          err.response?.data?.message ||
+          "Error updating enrolment"
+      );
     }
   };
 

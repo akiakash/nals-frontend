@@ -3,6 +3,7 @@ import axios from "axios";
 import "../assets/styles/style.css";
 import logo from "../assets/img/logo.png";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../config/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("https://student.nikeeworld.online/login", {
+      const res = await axios.post(`${API_BASE}/login`, {
         email,
         password,
       });

@@ -42,17 +42,36 @@ const AgreementCollage = () => {
     try {
       const formData = new FormData();
 
-      Object.keys(editData).forEach((key) => {
-        formData.append(key, editData[key]);
+      // Only send fields the backend expects; also avoids accidentally posting nested/extra keys.
+      const allowedKeys = [
+        "providerId",
+        "tradingName",
+        "instituteName",
+        "cricosCode",
+        "websiteLink",
+        "hasAgreement",
+        "agreementName",
+        "status",
+        "remark",
+        "startDate",
+        "expireDate",
+        "renewalDate",
+        "filePath",
+      ];
+
+      allowedKeys.forEach((key) => {
+        const value = editData?.[key];
+        if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
       });
 
       if (file) {
         formData.append("file", file);
       }
 
-      await axios.put(`${API}/${editData.id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      // Let Axios set the multipart boundary header automatically.
+      await axios.put(`${API}/${editData.id}`, formData);
 
       alert("Updated successfully ✅");
       setEditData(null);
@@ -60,7 +79,7 @@ const AgreementCollage = () => {
       fetchData();
     } catch (err) {
       console.error(err);
-      alert("Update failed ❌");
+      alert(err?.response?.data?.message || "Update failed ❌");
     }
   };
 
